@@ -23,6 +23,8 @@ resource "azurerm_linux_virtual_machine" "vm" {
   location            = azurerm_resource_group.rg.location
   size                = "Standard_B2ats_v2"
   admin_username      = var.admin_username
+  disable_password_authentication = true
+  
   network_interface_ids = [
     azurerm_network_interface.nic.id,
   ]

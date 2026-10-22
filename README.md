@@ -14,20 +14,20 @@ This project demonstrates the complete DevSecOps lifecycle and Cloud Security Op
 
 ```mermaid
 graph TD
-    subgraph CI/CD Pipeline
+    subgraph Pipeline [CI/CD Pipeline]
         GA[GitHub Actions] -->|Runs tfsec & terraform apply| TF[Terraform]
     end
 
-    subgraph Microsoft Azure
+    subgraph AzureCloud [Microsoft Azure]
         TF -->|Deploys| RG[Resource Group: rg-sec-lab]
         
-        subgraph Virtual Network
+        subgraph VNet [Virtual Network]
             NSG[Network Security Group <br/> Inbound TCP 22 restricted to Public IP] 
             VM[Ubuntu Linux VM <br/> Password Auth Disabled]
             NSG --- VM
         end
         
-        subgraph SIEM & Monitoring
+        subgraph SIEM [SIEM & Monitoring]
             AMA[Azure Monitor Agent <br/> Data Collection Rule: auth/authpriv]
             LAW[Log Analytics Workspace]
             SEN[Microsoft Sentinel]
@@ -37,8 +37,8 @@ graph TD
             LAW --- SEN
         end
         
-        RG -.-> Virtual Network
-        RG -.-> SIEM & Monitoring
+        RG -.-> NSG
+        RG -.-> LAW
     end
 ```
 

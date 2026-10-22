@@ -16,3 +16,8 @@ variable "admin_username" {
 variable "myIp" {
   type        = string
 }
+
+variable "ssh_public_key" {
+  type        = string
+  description = "public key"
+}
